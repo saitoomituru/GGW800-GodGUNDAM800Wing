@@ -9,7 +9,7 @@
 本書はManifestの[原記録](https://github.com/saitoomituru/ZeroRoomLab-manifest/blob/446470b27f6a7bf6d0cb498f87ac5658639ba7ad/docs/projects/2026-11-05-winter-survival-cogeneration.ja.md)をGGW800の設計正本として受領・再配置したもの。著者・出典: ふさもふ / 齋藤みつる / ZeroRoomLab。変更: 製品型番・参照path・実装正本・公開形式を追加（2026-11-05）。原記録の観測時点は変更しない。
 
 実装Issue: [CAD #1](https://github.com/saitoomituru/GGW800-GodGUNDAM800Wing/issues/1) / [回路・SPICE #2](https://github.com/saitoomituru/GGW800-GodGUNDAM800Wing/issues/2) / [統合実験・資源 #3](https://github.com/saitoomituru/GGW800-GodGUNDAM800Wing/issues/3)。  
-状態: 縮小運転への移行計画 / コジェネ設計・資源待ち / 発電試作・出力未測定  
+状態: 縮小運転への移行計画 / コジェネ設計・資源待ち / TEC1-12706単体の開放電圧を予備観測、負荷出力未測定  
 出典: 同日のふさもふ本人による現場報告・設計意図・命名指定。室温・積雪・負荷の連続ログは本書には未収録。  
 追跡: [越冬運用 #71](https://github.com/saitoomituru/ZeroRoomLab-manifest/issues/71) / [ゼーベック系 #72](https://github.com/saitoomituru/ZeroRoomLab-manifest/issues/72)
 
@@ -152,3 +152,9 @@ Source・製作物は現状有姿で提供し、特定の土地・熱源・冷�
 ## 公開する設計情報
 
 編集可能なCAD原本と中立交換形式、SPICE系の回路・netlist・パラメータ・モデル出典・再現コマンドを予定する。[公開仕様](publication.ja.md)に従い、設計ファイルの公開、シミュレーション、現物製作、実測を別状態で管理する。
+
+## 2026-11-05 予備実験の追記
+
+[実験ノート](../experiments/2026-11-05-tec1-12706-preliminary/README.ja.md)に、TEC1-12706を1枚ずつ測った開放2.4〜3Vの観測を保存した。全4枚の正確な個体別記録前に、加熱側が推定130℃前後と判断され手動停止した。33Ω・15Ωダミーロードは用意済みだが負荷出力は未測定。冷面0℃・理想接触・連続運転を実証した結果ではない。
+
+工作機器を稼働する電力・作業環境が不足し、治具の機械的拘束を整える基盤が制限されるという本人報告も実験条件として保持する。加工・固定・計測の利用資源を#1・#3へ接続し、追加自弁や停止設備の稼働を前提にしない。原記録と今回の予備観測の時点を区別する。
