@@ -42,3 +42,18 @@ create: GGW800固有のpin/lock/3folder検査。Atlantis workspace registryと�
 
 checks: 公開後のtree/gitlink・ファイル読み戻し、GitHub Actionsのbootstrap／boot／status／source解決。CAD・回路・実測の結果は作らない。
 [SEMANTIC-STOP] 未測定寸法・電圧・素子定数・性能を補完しない。historical-oae-unavailable。過去の観測を遡及生成しない。
+
+## 実行確認の追記
+
+確認時刻: 2026-11-05T02:29:34.179Z  
+対象commit: `b05bd68d083ffbd02431e304df7563eac38f6f4f`  
+[GitHub Actions run 41955427068](https://github.com/saitoomituru/GGW800-GodGUNDAM800Wing/actions/runs/41955427068) / job 127009084821、conclusion: **success**。
+
+- 公開repositoryのcheckoutと直接submodule2件の取得が成功。
+- Python 3.12上で既存bootstrapによるvenv再構築が成功。
+- GGW800 gitlink / lock / workspace検査がPASS。
+- atlantis_cli interfaces、Sphere-DOS boot、statusが成功。
+- MAGIのmaxwell・uriel・raphael・composite、profile zeroroomlabのsource解決が成功し、各required_missing_locallyは0。
+- root文書の相対link検査に欠損なし。JSON設定のparseを確認。
+
+この結果はNative Engineering SurfaceのCI上の再構築確認であり、devcontainer GUI起動・CAD/SPICE実モデル・熱電発電実機・現地越冬の合格ではない。本追記は文書のみで、検証済みcodeとgitlinkを変更しない。
