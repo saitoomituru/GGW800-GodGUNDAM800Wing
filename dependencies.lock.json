@@ -1,0 +1,18 @@
+{
+  "format": "ggw800-dependency-lock/1",
+  "purpose": "GGW800固有のGit submodule記録。Atlantisの汎用設定Schemaではない。",
+  "dependencies": [
+    {
+      "path": ".vendor/SphereOS-Atlantis",
+      "url": "https://github.com/saitoomituru/SphereOS-Atlantis.git",
+      "revision": "4380940f91c49cdc14b9fcc45783528647ed17d7",
+      "role": "Sphere-DOS development tools"
+    },
+    {
+      "path": "assets/ZeroRoomLab-manifest",
+      "url": "https://github.com/saitoomituru/ZeroRoomLab-manifest.git",
+      "revision": "446470b27f6a7bf6d0cb498f87ac5658639ba7ad",
+      "role": "explicit context and provenance asset"
+    }
+  ]
+}

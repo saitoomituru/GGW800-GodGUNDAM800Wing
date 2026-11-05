@@ -1,0 +1,7 @@
+# 開発機・生成物。実験の採用ログはexperimentsへ明示保存する。
+.venv/
+.atlantis/
+__pycache__/
+*.py[cod]
+build/
+.DS_Store

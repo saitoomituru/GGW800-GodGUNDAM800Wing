@@ -1,0 +1,21 @@
+{
+  "folders": [
+    {
+      "name": "GGW800",
+      "path": "."
+    },
+    {
+      "name": "SphereOS-Atlantis (tools)",
+      "path": ".vendor/SphereOS-Atlantis"
+    },
+    {
+      "name": "ZeroRoomLab-manifest (asset)",
+      "path": "assets/ZeroRoomLab-manifest"
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+      "**/__pycache__": true
+    }
+  }
+}
