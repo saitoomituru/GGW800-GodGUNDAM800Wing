@@ -34,3 +34,16 @@ Declared Position: PLIは入力と説明、CLI/APIは数値計算、Actionsは�
 基準結果: 138℃境界で `241.6911032028471〜250.53526175049166 W`。面積64cm²。これは開放端・定数モデルの推定値で、実測ではない。
 
 GitHub Actionsの結果は公開後のrunを別記録として参照する。専用daemon、汎用document server、物理装置の自動制御はこの変更の対象外。
+
+## Actions実行確認
+
+確認時刻: 2026-11-05T02:51:30.996Z  
+検証commit: `8962c34ee576d73f4f85f0bbddec5dd384b77999`
+
+- [計算workflow 41957750293](https://github.com/saitoomituru/GGW800-GodGUNDAM800Wing/actions/runs/41957750293): success。8 test method、基準JSON入力、module実行、概要生成、artifact保存が成功。
+- artifact: `thermalCoreCalc-41957750293-1`（入力JSONと結果receipt、保持期間30日）。
+- [Sphere-DOS開発足場workflow 41957750289](https://github.com/saitoomituru/GGW800-GodGUNDAM800Wing/actions/runs/41957750289): success。新test targetを含め既存足場の再構築確認が成功。
+- ローカル計算のpure result SHA-256: `7141c67b7aaab66bc5ec4d7f7bc03888769f9b3d16522db0f83e82c617f1ab44`。
+- GitHub上のcore/workflowを読み戻して書込内容と一致。新規文書の相対参照に欠損なし。
+
+workflow_dispatchの任意JSON入口を用意したが、今回の観測実行はpush-triggerの基準case。実測校正・負荷接続・有限雪は未検証。この追記では検証済みcodeを変更しない。
