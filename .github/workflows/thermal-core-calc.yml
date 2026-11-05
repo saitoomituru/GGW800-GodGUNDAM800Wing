@@ -1,0 +1,76 @@
+name: thermalCoreCalc 計算
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "Tools/**"
+      - "tests/test_thermal_core_calc.py"
+      - ".github/workflows/thermal-core-calc.yml"
+  pull_request:
+    paths:
+      - "Tools/**"
+      - "tests/test_thermal_core_calc.py"
+      - ".github/workflows/thermal-core-calc.yml"
+  workflow_dispatch:
+    inputs:
+      scenario_json:
+        description: "scenario JSON全文。空欄ならTEC1-12706・4枚・雪0℃の基準入力"
+        type: string
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+
+jobs:
+  calculate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: "3.12"
+      - name: 計算の回帰・境界・入力拒否テスト
+        run: python -B -m unittest discover -s tests -p "test_thermal_core_calc.py" -v
+      - name: scenario入力を保存
+        env:
+          THERMAL_SCENARIO: ${{ inputs.scenario_json }}
+        run: |
+          python - <<'PY'
+          import os
+          from pathlib import Path
+          output = Path("build/thermalCoreCalc")
+          output.mkdir(parents=True, exist_ok=True)
+          supplied = os.environ.get("THERMAL_SCENARIO", "").strip()
+          reference = Path("Tools/thermalCoreCalc/scenarios/tec1-12706-four-snow0.json")
+          payload = supplied if supplied else reference.read_text(encoding="utf-8")
+          (output / "input.json").write_text(payload, encoding="utf-8")
+          PY
+      - name: 同一moduleで計算しreceiptを保存
+        run: python -B -m Tools.thermalCoreCalc --input build/thermalCoreCalc/input.json --output build/thermalCoreCalc/result.json
+      - name: 計算概要を表示
+        run: |
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          receipt = json.loads(Path("build/thermalCoreCalc/result.json").read_text())
+          rows = ["## thermalCoreCalc", "", "理想開放端モデルの推定値。実測・安全認定ではない。", "",
+                  "| 高温面 ℃ | 熱入力 min W | 熱入力 max W |", "| ---: | ---: | ---: |"]
+          for case in receipt["result"]["cases"]:
+              rows.append(f'| {case["hot_side_c"]:g} | {case["heat_input_w_min"]:.3f} | {case["heat_input_w_max"]:.3f} |')
+          rows += ["", "result SHA-256: " + receipt["provenance"]["result_sha256"]]
+          with open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as stream:
+              stream.write("\n".join(rows) + "\n")
+          PY
+      - name: 入力・結果receiptをartifactとして保存
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: thermalCoreCalc-${{ github.run_id }}-${{ github.run_attempt }}
+          path: build/thermalCoreCalc/*.json
+          if-no-files-found: warn
+          retention-days: 30

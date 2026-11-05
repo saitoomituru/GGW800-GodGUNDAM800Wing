@@ -6,7 +6,7 @@ Copyright (C) 2026 ふさもふ / 齋藤みつる / ZeroRoomLab
 | --- | --- |
 | hardware配下の本製品のCAD・回路・SPICE・BOM設計Sourceと説明 | [CERN-OHL-P-2.0](LICENSES/CERN-OHL-P-2.0.txt) |
 | docs/design.ja.mdの「熱収支と電力収支」「ゴッドガンダム800ウイングのゼーベック系」「スターリング発電の並行候補」 | CERN-OHL-P-2.0 |
-| scripts・Makefile・開発用設定・workflow | [Apache-2.0](LICENSES/Apache-2.0.txt) |
+| Toolsの計算software・tests・scripts・Makefile・開発用設定・workflow | [Apache-2.0](LICENSES/Apache-2.0.txt) |
 | 一般説明・設計の上記以外の本文・実験票とoriginal data | [CC-BY-4.0](LICENSES/CC-BY-4.0.txt) |
 | .vendorとassetsのsubmodule | 各upstreamが定める個別license。再ライセンスしない |
 | third-party model・素材 | 出典側licenseと通知を保持 |

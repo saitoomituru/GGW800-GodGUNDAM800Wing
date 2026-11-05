@@ -35,6 +35,15 @@ make verify
 
 `GGW800.code-workspace`を開く。[導入とコマンド](SPHERE-DOS.md) / [開発・更新規約](docs/development.ja.md) / [固定revision](dependencies.lock.json)。
 
+## 再利用する計算Tools
+
+[thermalCoreCalc](Tools/thermalCoreCalc/README.md)に、4枚・理想接触・雪0℃・開放端の熱入力境界計算を固定。Python API、CLI、[GitHub Actions計算](.github/workflows/thermal-core-calc.yml)から同じmoduleを使い、入力・モデル版・出典・結果hashをreceiptに残す。実験で校正・適用範囲・testを更新する。
+
+```console
+make thermal-calc
+make test-thermal
+```
+
 ## イシューと資源
 
 [CAD #1](https://github.com/saitoomituru/GGW800-GodGUNDAM800Wing/issues/1)、[回路・SPICE #2](https://github.com/saitoomituru/GGW800-GodGUNDAM800Wing/issues/2)、[統合実験・資源 #3](https://github.com/saitoomituru/GGW800-GodGUNDAM800Wing/issues/3)。[Manifestとの責務分担](docs/issue-map.ja.md)も参照。

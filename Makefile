@@ -4,7 +4,7 @@ AT := $(ROOT)/.vendor/SphereOS-Atlantis
 MF := $(ROOT)/assets/ZeroRoomLab-manifest
 PY := $(AT)/.venv/bin/python
 
-.PHONY: help bootstrap sphere audit verify
+.PHONY: help bootstrap sphere audit verify thermal-calc test-thermal
 
 help:
 	@printf '%s\n' 'make bootstrap: 固定submoduleとvenvを準備' 'make sphere ARGS="interfaces --json": Atlantis CLI' 'make audit: MAGI sourceを解決' 'make verify: 開発足場のsmoke確認'
@@ -23,9 +23,16 @@ audit:
 	cd "$(AT)" && "$(PY)" -B magi/0.2.1/resolve_sources.py --slot composite --profile zeroroomlab --repo-root "ZeroRoomLab-manifest=$(MF)" --require-local
 
 verify:
+	$(MAKE) --no-print-directory test-thermal
 	python3 "$(ROOT)/scripts/check_scaffold.py"
 	git -C "$(ROOT)" submodule status -- .vendor/SphereOS-Atlantis assets/ZeroRoomLab-manifest
 	$(MAKE) --no-print-directory sphere ARGS="interfaces --json"
 	$(MAKE) --no-print-directory sphere ARGS="sphere-dos boot --json"
 	$(MAKE) --no-print-directory sphere ARGS="sphere-dos status --json"
 	$(MAKE) --no-print-directory audit
+
+thermal-calc:
+	cd "$(ROOT)" && python3 -B -m Tools.thermalCoreCalc --input "$(ROOT)/Tools/thermalCoreCalc/scenarios/tec1-12706-four-snow0.json"
+
+test-thermal:
+	cd "$(ROOT)" && python3 -B -m unittest discover -s tests -p "test_thermal_core_calc.py" -v

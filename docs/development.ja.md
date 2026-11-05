@@ -40,3 +40,9 @@ Atlantisの `scripts/bootstrap_venv.py`、`atlantis_cli`、`magi/0.2.1/resolve_s
 `scripts/check_scaffold.py` はGGW800固有のgitlink・lock・3folder workspaceを検査する。Atlantisの `workspace/components.json` はAtlantis自身の別component集合を扱うので、そのschemaを書き換えてGGW800へ流用しない。CLIやresolverの別実装は作らない。
 
 ローカルhostが本作業時に利用不能だったため、CLI実行はGitHub Actionsへ引き渡す。CIの結果はworkflow runを証拠とし、ファイル登録だけで起動確認済みにはしない。
+
+## 計算Tools / PLI・CLI・Actions
+
+[Tools索引](../Tools/README.md)からthermalCoreCalcのAPI・CLI・計算workflowを利用する。`make test-thermal`は単位・回帰・前提拒否を検証し、`make verify`にも含める。`make thermal-calc`は基準scenarioの計算だけを行いsubmodule展開を必要としない。
+
+code正本・scenario・model_id・hash・run URLに出力を接続する。MAGIのsource解決成功を物理の実証へ変換せず、実験結果で拘束を更新する。
